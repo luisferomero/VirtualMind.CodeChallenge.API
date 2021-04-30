@@ -26,6 +26,7 @@ namespace VirtualMind.CodeChallenge.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +38,14 @@ namespace VirtualMind.CodeChallenge.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Virtual Mind Code Challenge API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 

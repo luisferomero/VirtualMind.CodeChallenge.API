@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualMind.CodeChallenge.API", "VirtualMind.CodeChallenge.API\VirtualMind.CodeChallenge.API.csproj", "{A061984E-ED02-4EB0-87AC-F58457D58581}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{BE0337D5-A9AB-44FF-9DF0-96A8A7F3A843}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business Logic", "2. Business Logic", "{95056AFF-D041-4917-941A-5EAC86444151}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infrastructure", "3. Infrastructure", "{32D921D5-AD9F-4AD6-9C48-D744535DB581}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Cross-cutting", "4. Cross-cutting", "{E36543D6-A75D-4E47-B5AA-C13F0CF1233C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{AE130492-20DE-4E30-B023-989BF6EE3FCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A061984E-ED02-4EB0-87AC-F58457D58581} = {BE0337D5-A9AB-44FF-9DF0-96A8A7F3A843}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5062B385-D0DA-47A3-8CD7-75A43E00640A}
