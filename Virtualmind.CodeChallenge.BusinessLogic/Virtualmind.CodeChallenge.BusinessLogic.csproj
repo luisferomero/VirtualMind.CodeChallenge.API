@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Virtualmind.Codechallenge.Contracts\Virtualmind.Codechallenge.Contracts.csproj" />
+    <ProjectReference Include="..\Virtualmind.CodeChallenge.Entities\Virtualmind.CodeChallenge.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

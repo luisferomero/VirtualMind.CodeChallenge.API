@@ -3,17 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualMind.CodeChallenge.API", "VirtualMind.CodeChallenge.API\VirtualMind.CodeChallenge.API.csproj", "{A061984E-ED02-4EB0-87AC-F58457D58581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.API", "VirtualMind.CodeChallenge.API\Virtualmind.CodeChallenge.API.csproj", "{A061984E-ED02-4EB0-87AC-F58457D58581}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{BE0337D5-A9AB-44FF-9DF0-96A8A7F3A843}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business Logic", "2. Business Logic", "{95056AFF-D041-4917-941A-5EAC86444151}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Business Logic", "3. Business Logic", "{95056AFF-D041-4917-941A-5EAC86444151}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infrastructure", "3. Infrastructure", "{32D921D5-AD9F-4AD6-9C48-D744535DB581}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{32D921D5-AD9F-4AD6-9C48-D744535DB581}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Cross-cutting", "4. Cross-cutting", "{E36543D6-A75D-4E47-B5AA-C13F0CF1233C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Cross-cutting", "5. Cross-cutting", "{E36543D6-A75D-4E47-B5AA-C13F0CF1233C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Tests", "5. Tests", "{AE130492-20DE-4E30-B023-989BF6EE3FCE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Tests", "6. Tests", "{AE130492-20DE-4E30-B023-989BF6EE3FCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.BusinessLogic", "Virtualmind.CodeChallenge.BusinessLogic\Virtualmind.CodeChallenge.BusinessLogic.csproj", "{F8267042-2D3B-43B1-99C6-0D72F96D2C4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.Entities", "Virtualmind.CodeChallenge.Entities\Virtualmind.CodeChallenge.Entities.csproj", "{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.Utilities", "Virtualmind.Codechallenge.Utilities\Virtualmind.CodeChallenge.Utilities.csproj", "{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.Codechallenge.Tests", "Virtualmind.Codechallenge.Tests\Virtualmind.Codechallenge.Tests.csproj", "{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.DataAccess", "Virtualmind.CodeChallenge.DataAccess\Virtualmind.CodeChallenge.DataAccess.csproj", "{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtualmind.CodeChallenge.Repository", "Virtualmind.CodeChallenge.Repository\Virtualmind.CodeChallenge.Repository.csproj", "{BFD649AB-00FE-4ACA-9A23-BE199132B125}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Contracts", "2. Contracts", "{0353E0EA-09F5-42E2-A54F-DA53AF8A517D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Virtualmind.Codechallenge.Contracts", "Virtualmind.Codechallenge.Contracts\Virtualmind.Codechallenge.Contracts.csproj", "{B4C23B8D-0F7A-4C74-AAED-369A07351784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,12 +41,47 @@ Global
 		{A061984E-ED02-4EB0-87AC-F58457D58581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A061984E-ED02-4EB0-87AC-F58457D58581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A061984E-ED02-4EB0-87AC-F58457D58581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8267042-2D3B-43B1-99C6-0D72F96D2C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8267042-2D3B-43B1-99C6-0D72F96D2C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8267042-2D3B-43B1-99C6-0D72F96D2C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8267042-2D3B-43B1-99C6-0D72F96D2C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD649AB-00FE-4ACA-9A23-BE199132B125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD649AB-00FE-4ACA-9A23-BE199132B125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD649AB-00FE-4ACA-9A23-BE199132B125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD649AB-00FE-4ACA-9A23-BE199132B125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4C23B8D-0F7A-4C74-AAED-369A07351784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C23B8D-0F7A-4C74-AAED-369A07351784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C23B8D-0F7A-4C74-AAED-369A07351784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C23B8D-0F7A-4C74-AAED-369A07351784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A061984E-ED02-4EB0-87AC-F58457D58581} = {BE0337D5-A9AB-44FF-9DF0-96A8A7F3A843}
+		{F8267042-2D3B-43B1-99C6-0D72F96D2C4F} = {95056AFF-D041-4917-941A-5EAC86444151}
+		{A5A57D3D-0946-4D2C-BF84-0F0C1AB5B5A8} = {E36543D6-A75D-4E47-B5AA-C13F0CF1233C}
+		{37FE46D8-99D5-48DE-90F5-ACF2749FE5D3} = {E36543D6-A75D-4E47-B5AA-C13F0CF1233C}
+		{B8A49766-46E4-4AEB-BE1A-F43CFC7897A5} = {AE130492-20DE-4E30-B023-989BF6EE3FCE}
+		{87B1E0AA-AFB9-4FBA-ACBF-F4E981755E7C} = {32D921D5-AD9F-4AD6-9C48-D744535DB581}
+		{BFD649AB-00FE-4ACA-9A23-BE199132B125} = {32D921D5-AD9F-4AD6-9C48-D744535DB581}
+		{B4C23B8D-0F7A-4C74-AAED-369A07351784} = {0353E0EA-09F5-42E2-A54F-DA53AF8A517D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5062B385-D0DA-47A3-8CD7-75A43E00640A}

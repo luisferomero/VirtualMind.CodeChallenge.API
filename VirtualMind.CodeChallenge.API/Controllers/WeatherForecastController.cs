@@ -35,5 +35,11 @@ namespace VirtualMind.CodeChallenge.API.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("exception")]
+        public IEnumerable<WeatherForecast> GetException()
+        {
+            throw new Exception("My custom exceptin");
+        }
     }
 }
