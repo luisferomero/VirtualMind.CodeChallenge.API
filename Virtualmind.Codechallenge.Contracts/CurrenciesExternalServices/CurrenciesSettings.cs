@@ -14,7 +14,8 @@ namespace Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices
                 Url = "https://www.bancoprovincia.com.ar/Principal/Dolar",
                 PurchaseRateField = "[0]",
                 SaleRateField = "[1]",
-                LastUpdateField = "[2]"
+                LastUpdateField = "[2]",
+                Limit = 200m
             },
             new CurrencyApiSetting()
             {
@@ -23,6 +24,7 @@ namespace Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices
                 PurchaseRateField = "[0]",
                 SaleRateField = "[1]",
                 LastUpdateField = "[2]",
+                Limit = 300m,
                 QuoteRate = decimal.Divide(1,4)
             },
         };
@@ -36,5 +38,6 @@ namespace Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices
         public string SaleRateField { get; set; }
         public string LastUpdateField { get; set; }
         public decimal QuoteRate { get; set; } = 1;
+        public decimal? Limit { get; set; }
     }
 }

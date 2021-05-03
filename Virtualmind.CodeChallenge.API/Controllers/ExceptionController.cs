@@ -21,11 +21,11 @@ namespace Virtualmind.CodeChallenge.API.Controllers
         //}
 
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> PostExceptionAsync()
+        public ActionResult PostExceptionAsync()
         {
             IExceptionHandlerPathFeature exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            string routeWhereExceptionOccurred = exceptionFeature.Path;
+            //string routeWhereExceptionOccurred = exceptionFeature.Path;
 
             //await _auditService.PostExceptionAsync(
             //    new ExceptionsHistory

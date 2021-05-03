@@ -14,7 +14,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Virtualmind.Codechallenge.Contracts\Virtualmind.Codechallenge.Contracts.csproj" />
+    <ProjectReference Include="..\Virtualmind.CodeChallenge.DataAccess\Virtualmind.CodeChallenge.DataAccess.csproj" />
     <ProjectReference Include="..\Virtualmind.CodeChallenge.Entities\Virtualmind.CodeChallenge.Entities.csproj" />
+    <ProjectReference Include="..\Virtualmind.CodeChallenge.Repository\Virtualmind.CodeChallenge.Repository.csproj" />
+    <ProjectReference Include="..\Virtualmind.Codechallenge.Utilities\Virtualmind.CodeChallenge.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Virtualmind.CodeChallenge.Entities.Currencies
+namespace Virtualmind.CodeChallenge.API.DTO
 {
-    public class CurrencyPurchase
+    public class CurrencyPurchaseDTO
     {
         [Required]
         public int Id { get; set; }

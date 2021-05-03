@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
@@ -7,11 +9,19 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Virtualmind.CodeChallenge.DataAccess.Contexts;
 
 namespace Virtualmind.CodeChallenge.API
 {
     public static class Config
     {
+        public static void ConfigDbContext(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<CurrenciesDbContext>(config =>
+            {
+                config.UseSqlServer(configuration.GetConnectionString("CurrencyExchange"));
+            });
+        }
         public static void CofigSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
@@ -61,7 +71,9 @@ namespace Virtualmind.CodeChallenge.API
                         services.AddScoped(implementation);
                 }
             }
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }
