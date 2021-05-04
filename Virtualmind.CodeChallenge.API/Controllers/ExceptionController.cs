@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Virtualmind.CodeChallenge.BusinessLogic.Services.Logs;
+using Virtualmind.CodeChallenge.BusinessLogic.Services.LogService;
 using Virtualmind.CodeChallenge.Utilities.Logger;
 
 namespace Virtualmind.CodeChallenge.API.Controllers
@@ -15,7 +15,7 @@ namespace Virtualmind.CodeChallenge.API.Controllers
     [ApiController]
     public class ExceptionController : ControllerBase
     {
-        private ILoggerService _loggerService;
+        private readonly ILoggerService _loggerService;
 
         public ExceptionController(ILoggerService loggerService)
         {
