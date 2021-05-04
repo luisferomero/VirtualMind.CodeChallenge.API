@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Virtualmind.CodeChallenge.Utilities.Helpers
+namespace Virtualmind.CodeChallenge.Entities.Responses
 {
     /// <summary>
     /// Class to be able to find out if the service was completed correctly or there was an error.

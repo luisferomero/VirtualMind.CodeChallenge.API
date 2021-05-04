@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Virtualmind.CodeChallenge.API.DTO;
 using Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies;
 using Virtualmind.CodeChallenge.Entities.Currencies;
-using Virtualmind.CodeChallenge.Utilities.Helpers;
+using Virtualmind.CodeChallenge.Entities.Responses;
 
 namespace Virtualmind.CodeChallenge.API.Controllers
 {

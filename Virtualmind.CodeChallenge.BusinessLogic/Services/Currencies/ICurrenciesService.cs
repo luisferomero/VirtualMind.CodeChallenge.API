@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices;
 using Virtualmind.CodeChallenge.Entities.Currencies;
-using Virtualmind.CodeChallenge.Utilities.Helpers;
+using Virtualmind.CodeChallenge.Entities.Responses;
 
 namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
 {

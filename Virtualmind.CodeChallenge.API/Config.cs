@@ -53,7 +53,7 @@ namespace Virtualmind.CodeChallenge.API
 
         public static void ConfigServices(IServiceCollection services)
         {
-            string[] projects = new string[] { "Virtualmind.CodeChallenge.BusinessLogic" };
+            string[] projects = new string[] { "Virtualmind.CodeChallenge.BusinessLogic", "Virtualmind.Codechallenge.Contracts" };
 
             foreach (string project in projects)
             {

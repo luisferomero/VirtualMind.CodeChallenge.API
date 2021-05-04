@@ -9,25 +9,27 @@ using System.Threading.Tasks;
 using Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices;
 using Virtualmind.CodeChallenge.DataAccess.Contexts;
 using Virtualmind.CodeChallenge.Entities.Currencies;
+using Virtualmind.CodeChallenge.Entities.Responses;
 using Virtualmind.CodeChallenge.Repository.UnitOfWork;
-using Virtualmind.CodeChallenge.Utilities.Helpers;
 
 namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
 {
     public class CurrenciesService : ICurrenciesService
     {
         private readonly IUnitOfWorkService UnitOfWork;
+        private readonly ICurrenciesExternalService _currenciesExternalService;
 
-        public CurrenciesService(CurrenciesDbContext dbContext)
+        public CurrenciesService(CurrenciesDbContext dbContext, ICurrenciesExternalService currenciesExternalService)
         {
             UnitOfWork = new UnitOfWorkService(dbContext);
+            _currenciesExternalService = currenciesExternalService;
         }
         public async Task<CurrencyQuote> GetCurrencyQuoteAsync(string ISOCode)
         {
             CurrencyApiSetting currencySetting = CurrenciesSettings.CurrenciesApiSettings
                 .FirstOrDefault(c => c.ISOCode == ISOCode);
 
-            JObject response = await GetCurrencyExchangeRateAsync(currencySetting.Url);
+            JObject response = await _currenciesExternalService.GetCurrencyExchangeRateAsync(currencySetting.Url);
 
             CurrencyQuote currencyQuote = new CurrencyQuote()
             {
@@ -37,20 +39,6 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
                 LastUpdate = DateTime.Now
             };
             return currencyQuote;
-        }
-
-        private async Task<JObject> GetCurrencyExchangeRateAsync(string url)
-        {
-            using HttpClient httpClient = new HttpClient();
-            using HttpResponseMessage response = await httpClient.GetAsync(url);
-
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                return JObject.Parse($"{{'response':{jsonResponse}}}");
-            }
-            else
-                throw new Exception($"An error occurred on the currency external service ({response.StatusCode})");
         }
 
         public bool IsCurrencyAbaible(string ISOCode)
@@ -68,13 +56,14 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
             CurrencyApiSetting currencySetting = CurrenciesSettings.CurrenciesApiSettings
                 .FirstOrDefault(c => c.ISOCode == purchase.ISOCode);
 
+            CurrencyQuote currencyQuote = await GetCurrencyQuoteAsync(purchase.ISOCode);
+
+            purchase.Amount /= currencyQuote.PurchaseRate;
+
             decimal monthlyAmmout = UnitOfWork.GenericRepository<CurrencyPurchase>()
                 .GetQueryable(null)
                 .Where(x => x.UserId == purchase.UserId && x.DateTime.Month == DateTime.Now.Month)
                 .Sum(x => x.Amount);
-
-            CurrencyQuote currencyQuote = await GetCurrencyQuoteAsync(purchase.ISOCode);
-            purchase.Amount /= currencyQuote.PurchaseRate;
 
             if (currencySetting.Limit != null && purchase.Amount > currencySetting.Limit)
             {

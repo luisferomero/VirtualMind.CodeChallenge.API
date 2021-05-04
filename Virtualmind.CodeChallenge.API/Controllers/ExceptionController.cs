@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Virtualmind.CodeChallenge.BusinessLogic.Services.Logs;
+using Virtualmind.CodeChallenge.Utilities.Logger;
 
 namespace Virtualmind.CodeChallenge.API.Controllers
 {
@@ -13,30 +15,27 @@ namespace Virtualmind.CodeChallenge.API.Controllers
     [ApiController]
     public class ExceptionController : ControllerBase
     {
-        //private IAuditService _auditService;
+        private ILoggerService _loggerService;
 
-        //public ExceptionController(IAuditService auditService)
-        //{
-        //    _auditService = auditService;
-        //}
+        public ExceptionController(ILoggerService loggerService)
+        {
+            _loggerService = loggerService;
+        }
 
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public ActionResult PostExceptionAsync()
         {
             IExceptionHandlerPathFeature exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            //string routeWhereExceptionOccurred = exceptionFeature.Path;
+            CustomLogDetail logDetail = new CustomLogDetail
+            {
+                Path = exceptionFeature.Path,
+                Exception = exceptionFeature.Error,
+                ExceptionTrace = exceptionFeature.Error.StackTrace,
+                Product = "Currency Exchange"
+            };
 
-            //await _auditService.PostExceptionAsync(
-            //    new ExceptionsHistory
-            //    {
-            //        CreationDate = DateTime.Now,
-            //        CreationUserId = User.Claims.Count() == 0 ? (int?)null : int.Parse(User.Claims.Where(A => A.Type == "UserId").Single().Value),
-            //        ExceptionTrace = exceptionFeature.Error.StackTrace,
-            //        InnerException = exceptionFeature.Error.InnerException?.Message,
-            //        Message = exceptionFeature.Error.Message,
-            //        Path = exceptionFeature.Path
-            //    });
+            _loggerService.PostExceptionAsync(logDetail);
 
             return StatusCode(StatusCodes.Status500InternalServerError, exceptionFeature.Error.Message);
         }
