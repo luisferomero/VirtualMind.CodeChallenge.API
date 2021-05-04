@@ -1,9 +1,10 @@
 # VirtualMind.CodeChallenge.API
 ### Como correr el proyecto?
 
-1. Ejecutar el archivo "CREATE DATABASE.SQL" en la base de datos local
-2. Abrir la solucion en Visual Studio
-3. Ejecutar el proyecto F5
+1. Ejecutar el archivo "CREATE DATABASE.SQL" en la base de datos local.
+2. Abrir la solucion **VirtualMind.CodeChallenge.API.sln** en Visual Studio.
+3. Selecionar **VirtualMind.CodeChallenge.API** como startup project.
+4. Presionar F5
 
 # Preguntas
 ## ¿Qué opina de pasar el id de usuario como input del endpoint?
