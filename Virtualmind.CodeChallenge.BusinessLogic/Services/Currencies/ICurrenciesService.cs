@@ -10,8 +10,8 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
 {
     public interface ICurrenciesService
     {
-        Task<CurrencyQuote> GetCurrencyQuoteAsync(string ISOCode);
-        Task<ResponseHelper<CurrencyPurchase>> PurchaseCurrencyAsync(CurrencyPurchase purchase);
+        Task<CurrencyQuotation> GetCurrencyQuotationAsync(string ISOCode);
+        Task<ResponseHelper<CurrencyPurchase>> BuyCurrencyAsync(CurrencyPurchase purchase);
         Task<CurrencyPurchase> GetPurchaseAsync(int id);
         bool IsCurrencyAbaible(string ISOCode);
     }

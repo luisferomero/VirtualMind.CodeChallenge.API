@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Virtualmind.CodeChallenge.Entities.Currencies
 {
-    public class CurrencyQuote
+    public class CurrencyQuotation
     {
         public string ISOCode { get; set; }
         public decimal PurchaseRate { get; set; }

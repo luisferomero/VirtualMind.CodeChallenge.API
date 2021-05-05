@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices;
 using Virtualmind.CodeChallenge.DataAccess.Contexts;
@@ -24,14 +21,15 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
             UnitOfWork = new UnitOfWorkService(dbContext);
             _currenciesExternalService = currenciesExternalService;
         }
-        public async Task<CurrencyQuote> GetCurrencyQuoteAsync(string ISOCode)
+
+        public async Task<CurrencyQuotation> GetCurrencyQuotationAsync(string ISOCode)
         {
             CurrencyApiSetting currencySetting = CurrenciesSettings.CurrenciesApiSettings
                 .FirstOrDefault(c => c.ISOCode == ISOCode);
 
             JObject response = await _currenciesExternalService.GetCurrencyExchangeRateAsync(currencySetting.Url);
 
-            CurrencyQuote currencyQuote = new CurrencyQuote()
+            CurrencyQuotation currencyQuote = new CurrencyQuotation()
             {
                 ISOCode = currencySetting.ISOCode,
                 PurchaseRate = (decimal) response.SelectToken($"response{currencySetting.PurchaseRateField}") * currencySetting.QuoteRate,
@@ -51,36 +49,21 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
             return await UnitOfWork.GenericRepository<CurrencyPurchase>().GetByAsync(x => x.Id == id, null);
         }
 
-        public async Task<ResponseHelper<CurrencyPurchase>> PurchaseCurrencyAsync(CurrencyPurchase purchase)
+        public async Task<ResponseHelper<CurrencyPurchase>> BuyCurrencyAsync(CurrencyPurchase purchase)
         {
+            CurrencyQuotation currencyQuotation = await GetCurrencyQuotationAsync(purchase.ISOCode);
+
+            purchase.Amount /= currencyQuotation.PurchaseRate;
+
             CurrencyApiSetting currencySetting = CurrenciesSettings.CurrenciesApiSettings
                 .FirstOrDefault(c => c.ISOCode == purchase.ISOCode);
 
-            CurrencyQuote currencyQuote = await GetCurrencyQuoteAsync(purchase.ISOCode);
+            decimal monthlyAmmout = GetUserMonthlyAmmount(purchase);
 
-            purchase.Amount /= currencyQuote.PurchaseRate;
+            List<string> errors = ValidatePurchase(purchase, currencySetting.Limit, monthlyAmmout);
 
-            decimal monthlyAmmout = UnitOfWork.GenericRepository<CurrencyPurchase>()
-                .GetQueryable(null)
-                .Where(x => x.UserId == purchase.UserId && x.DateTime.Month == DateTime.Now.Month)
-                .Sum(x => x.Amount);
-
-            if (currencySetting.Limit != null && purchase.Amount > currencySetting.Limit)
-            {
-                List<string> errors = new List<string>
-                {
-                    $"This transaction exceeds de limint amomunt for the currency."
-                };
+            if (errors.Count > 0)
                 return new ResponseHelper<CurrencyPurchase>(errors, statusCode: 400);
-            }
-            if (currencySetting.Limit != null && monthlyAmmout > currencySetting.Limit)
-            {
-                List<string> errors = new List<string>
-                {
-                    $"The monthly amount for currency {purchase.ISOCode} has been exceeded."
-                };
-                return new ResponseHelper<CurrencyPurchase>(errors, statusCode:400);
-            }
             else
             {
                 purchase.DateTime = DateTime.Now;
@@ -88,6 +71,27 @@ namespace Virtualmind.CodeChallenge.BusinessLogic.Services.Currencies
                 await UnitOfWork.CompleteAsync();
                 return new ResponseHelper<CurrencyPurchase>(purchase);
             }
+        }
+
+        private decimal GetUserMonthlyAmmount(CurrencyPurchase purchase)
+        {
+            return UnitOfWork.GenericRepository<CurrencyPurchase>()
+                                .GetQueryable(null)
+                                .Where(x => x.UserId == purchase.UserId && x.DateTime.Month == DateTime.Now.Month)
+                                .Sum(x => x.Amount);
+        }
+
+        private List<string> ValidatePurchase(CurrencyPurchase purchase, decimal? limit, decimal monthlyAmmout)
+        {
+            List<string> errors = new List<string>();
+
+            if (limit != null && (purchase.Amount > limit || purchase.Amount + monthlyAmmout > limit))
+                errors.Add("This transaction exceeds de limint amomunt for the currency.");
+
+            if (limit != null && monthlyAmmout > limit)
+                errors.Add($"The monthly amount for currency {purchase.ISOCode} has been exceeded.");
+
+            return errors;
         }
     }
 }

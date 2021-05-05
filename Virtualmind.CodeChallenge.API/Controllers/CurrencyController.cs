@@ -33,16 +33,16 @@ namespace Virtualmind.CodeChallenge.API.Controllers
         /// <returns>currency quote of the day.</returns>
         /// <response code="404">The currency you are trying to find is not in the currency list or is not available at the moment.</response>
         [HttpGet("{code}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CurrencyQuote))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CurrencyQuotation))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CurrencyQuote>> GetCurrencyQuote(string code)
+        public async Task<ActionResult<CurrencyQuotation>> GetCurrencyQuotation(string code)
         {
             code = code.ToUpper().Trim();
 
             if (!_curreciesService.IsCurrencyAbaible(code))
                 return NotFound($@"The currency ""{code}"" is not available at this moment.");
 
-            return Ok(await _curreciesService.GetCurrencyQuoteAsync(code));
+            return Ok(await _curreciesService.GetCurrencyQuotationAsync(code));
         }
 
         /// <summary>
@@ -70,17 +70,17 @@ namespace Virtualmind.CodeChallenge.API.Controllers
         /// <param name="purchaseDTO"></param>
         /// <returns>currency quote of the day.</returns>
         /// <response code="404">The currency you are trying to find is not in the currency list or is not available at the moment.</response>
-        [HttpPost("{code}")]
+        [HttpPost("{code}/purchases")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> PurchaseCurrency(string code, CurrencyPurchaseDTO purchaseDTO)
+        public async Task<ActionResult> BuyCurrency(string code, CurrencyPurchaseDTO purchaseDTO)
         {
             code = code.ToUpper().Trim();
 
             if (!_curreciesService.IsCurrencyAbaible(code))
                 return NotFound($@"The currency ""{code}"" is not available at this moment.");
 
-            ResponseHelper<CurrencyPurchase> response = await _curreciesService.PurchaseCurrencyAsync(_mapper.Map<CurrencyPurchase>(purchaseDTO));
+            ResponseHelper<CurrencyPurchase> response = await _curreciesService.BuyCurrencyAsync(_mapper.Map<CurrencyPurchase>(purchaseDTO));
 
             if (!response.Success)
             {
@@ -90,9 +90,9 @@ namespace Virtualmind.CodeChallenge.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            CurrencyPurchaseDTO DTO = _mapper.Map<CurrencyPurchaseDTO>(response.Entity);
+            CurrencyPurchaseDTO dto = _mapper.Map<CurrencyPurchaseDTO>(response.Entity);
 
-            return CreatedAtAction(nameof(GetPurchase),new {id = DTO.Id }, DTO);
+            return CreatedAtAction(nameof(GetPurchase),new {id = dto.Id }, dto);
         }
     }
 }
