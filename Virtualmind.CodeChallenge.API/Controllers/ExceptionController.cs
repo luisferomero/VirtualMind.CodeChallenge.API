@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Virtualmind.CodeChallenge.BusinessLogic.Services.LogService;
+using Microsoft.Extensions.Logging;
 using Virtualmind.CodeChallenge.Utilities.Logger;
 
 namespace Virtualmind.CodeChallenge.API.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ExceptionController : ControllerBase
     {
-        private readonly ILoggerService _loggerService;
+        private readonly ILogger<ExceptionController> _logger;
 
-        public ExceptionController(ILoggerService loggerService)
+        public ExceptionController(ILogger<ExceptionController> logger)
         {
-            _loggerService = loggerService;
+            _logger = logger;
         }
 
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
@@ -27,17 +23,14 @@ namespace Virtualmind.CodeChallenge.API.Controllers
         {
             IExceptionHandlerPathFeature exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            CustomLogDetail logDetail = new CustomLogDetail
-            {
-                Path = exceptionFeature.Path,
-                Exception = exceptionFeature.Error,
-                ExceptionTrace = exceptionFeature.Error.StackTrace,
-                Product = "Currency Exchange"
-            };
+            //_logger.LogWarning("THIS IS A CUSTOM MESSAGE FROM EXEPTION CONTROLLER");
+            //_logger.LogError("THIS IS A CUSTOM MESSAGE FROM EXEPTION CONTROLLER");
 
-            _loggerService.PostExceptionAsync(logDetail);
+            string message = LoggerHelper.GetMessageFromException(exceptionFeature.Error);
 
-            return StatusCode(StatusCodes.Status500InternalServerError, exceptionFeature.Error.Message);
+            _logger.LogError(exceptionFeature.Error, message);
+
+            return StatusCode(StatusCodes.Status500InternalServerError, message);
         }
     }
 }

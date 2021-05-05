@@ -11,7 +11,7 @@ namespace Virtualmind.Codechallenge.Contracts.CurrenciesExternalServices
             new CurrencyApiSetting()
             {
                 ISOCode = "USD",
-                Url = "https://www.bancoprovincia.com.ar/Principal/Dolar",
+                Url = "https://www.bancoprovincia.com.ar/Principal/Dolars",
                 PurchaseRateField = "[0]",
                 SaleRateField = "[1]",
                 LastUpdateField = "[2]",

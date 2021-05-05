@@ -26,6 +26,18 @@ namespace VirtualMind.CodeChallenge.API.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+
+            _logger.LogWarning("THIS IS A CUSTOM MESSAGE");
+
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (NotImplementedException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
@@ -34,12 +46,6 @@ namespace VirtualMind.CodeChallenge.API.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-        }
-
-        [HttpGet("exception")]
-        public IEnumerable<WeatherForecast> GetException()
-        {
-            throw new Exception("My custom exceptin");
         }
     }
 }
