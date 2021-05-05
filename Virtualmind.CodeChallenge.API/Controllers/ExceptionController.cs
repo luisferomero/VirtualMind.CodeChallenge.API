@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Virtualmind.CodeChallenge.Utilities.Logger;
+using Virtualmind.CodeChallenge.Utilities.Helpers;
 
 namespace Virtualmind.CodeChallenge.API.Controllers
 {

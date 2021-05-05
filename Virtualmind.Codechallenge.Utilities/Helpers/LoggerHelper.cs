@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Virtualmind.CodeChallenge.Utilities.Logger
+namespace Virtualmind.CodeChallenge.Utilities.Helpers
 {
     public static class LoggerHelper
     {
